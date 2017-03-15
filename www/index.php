@@ -41,8 +41,7 @@
 			<center><div id="carga"> </div></center>
 			<div ng-repeat="x in campos">
 			<?php 	
-					echo $nuevo_obj->imprimir("{{x.abc}}"); // trae la información a mostrar.
-
+					echo $nuevo_obj->imprimir("{{x.abc}}"); // funcion que imprime
 				?>
 		 	 
             <table class="table table-hover table-bordered">
@@ -55,9 +54,9 @@
                 </thead>
                  <tbody>
                   <tr>
-                    <td>{{ x.Enfermedad }}</td>
-                    <td>{{ x.conteo_total }}</td>
-                    <td>{{ x.conteo_sintomas }}</td>
+                    <td>{{ x.Enfermedad }}</td><!--campos base de datos-->
+                    <td>{{ x.conteo_total }}</td><!--campos base de datos-->
+                    <td>{{ x.conteo_sintomas }}</td><!--campos base de datos-->
 
                   </tr>
                   </tbody>
