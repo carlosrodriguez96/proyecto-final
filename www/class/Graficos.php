@@ -1,7 +1,11 @@
 <?php 
 	class Graficos
 	{
-
+		/**
+		* Esta función se encarga de invocar los estilos.
+		* @param	texto		ubicacion de la carpeta donde se encuentra el bootstrap
+		*@return	texto		retorna la ubicaccion de la carpeta
+		*/
 		function estilos($carpeta=null)
 			{
 				$salida="";
@@ -11,7 +15,7 @@
 						 <script src='$carpeta/js/bootstrap.min.js'></script>";
 				return $salida;		 
 			}
-				/**
+			/**
 			* Esta función se encarga de retornar el encabezado  para que sean impresos desde afuera.
 			* El emcabezado debe estar presente en todos los archivos que muestren resultados al usuario. Es decir, en todas las secciones.
 			*/
@@ -22,6 +26,9 @@
 				return $salida;
 
 			}
+			/**
+			* Esta función se de imprimir el sql.			
+			*/
 		 function imprimir($texto){
 
 			 	include 'config.php';
