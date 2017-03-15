@@ -68,7 +68,7 @@
 		</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/mi_js.js"></script>
+	<script type="text/javascript" src="js/mi_js.js"></script> 
 	
 	 
 
