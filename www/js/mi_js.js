@@ -7,9 +7,9 @@
 		var acumuladorApp = angular.module( 'acumuladorApp', [] );        
         acumuladorApp.controller( "acumuladorAppCtrl",           
             [ "$scope", "$http",
-            function( $scope, $http )
+            function( $scope, $http )//inicio de la funcion
             {
-            	$scope.cargar_datos_php=function()
+            	$scope.cargar_datos_php=function()//inicio de la funcion cargar_datos_php.
 					                      
                     {          
 		                    
