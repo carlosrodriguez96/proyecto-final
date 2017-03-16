@@ -108,18 +108,14 @@ class BD extends Graficos
 		
 
 			$salida = "";
-				include 'config.php';
+			include 'config.php';
 			//------------SQL Se traen datos----------------------------------------------------
 			$sql = "SELECT * FROM  $tabla ";	
-				if($sn_pruebas=="s") echo "<h3><p class='bg-success'>$sql</p></h3>";
+			if($sn_pruebas=="s") echo "<h3><p class='bg-success'>$sql</p></h3>";
 			$resultado = $this->conexion->query( $sql );
-
 			$salida = "<SELECT  id='sintomas' ng-model='lista' ng-change='cargar_datos_php()' multiple size='20' class='form-control'>";
-									$contador=0;
 			while( $fila = mysqli_fetch_assoc( $resultado ) )
 			{
-
-
 				$salida .=
 					 "<tr>
 						<td>
@@ -140,10 +136,7 @@ class BD extends Graficos
 		}
 	 	/**
 		*esta funcion se encarga realizar la consulta en la tabla.
-		*
-		*@param 		texto 			Es el nombre de la tabla.
-		*@param 		texto 			campo clave.
-		*@param 		texto 			campo a buscar.	
+		*@param 		texto 			valores de la lista.		
 		*@return 		caracteres 		retorna la consulta.
 		*/
 
