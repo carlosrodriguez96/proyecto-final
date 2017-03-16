@@ -3,7 +3,7 @@
 	{
 		/**
 		* Esta función se encarga de invocar los estilos.
-		* @param	texto		ubicacion de la carpeta donde se encuentra el bootstrap
+		*@param		texto		ubicacion de la carpeta donde se encuentra el bootstrap
 		*@return	texto		retorna la ubicaccion de la carpeta
 		*/
 		function estilos($carpeta=null)
@@ -27,7 +27,8 @@
 
 		}
 		/**
-		* Esta función se de imprimir el sql.			
+		* Esta función se de imprimir el sql.
+		*@param		texto		sql.
 		*/
 		 function imprimir($texto)
 		 {
