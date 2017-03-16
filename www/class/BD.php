@@ -60,7 +60,7 @@ class BD extends Graficos
 		 	$resultado = $this->conexion->query( $sql );	
 		 	return $resultado;
 		 }
-		  /**
+		/**
 		*esta funcion se encarga de traer los datos de la tabla.
 		*
 		*@param 		texto 			resultado de la busqueda.
@@ -101,42 +101,38 @@ class BD extends Graficos
 		 *@param 		texto 			campo a mostrar.
 		 *@param 		texto 			metodo.
 		 *@param 		texto 			envio de informacion.
-		 *@param 		caracteres		retorna la informacion.
+		 *@return 		caracteres		retorna la informacion.
 		 */
 		 function traer_informacion( $nombre_lista, $tabla, $campo_llave_primaria, $campo_a_mostrar,$method,$action )
 		{
 		
 
-		$salida = "";
-			include 'config.php';
-		//------------SQL Se traen datos----------------------------------------------------
-		$sql = "SELECT * FROM  $tabla ";	
-			if($sn_pruebas=="s") echo "<h3><p class='bg-success'>$sql</p></h3>";
-		$resultado = $this->conexion->query( $sql );
+			$salida = "";
+				include 'config.php';
+			//------------SQL Se traen datos----------------------------------------------------
+			$sql = "SELECT * FROM  $tabla ";	
+				if($sn_pruebas=="s") echo "<h3><p class='bg-success'>$sql</p></h3>";
+			$resultado = $this->conexion->query( $sql );
 
-		$salida = "<SELECT  id='sintomas' ng-model='lista' ng-change='cargar_datos_php()' multiple size='20' class='form-control'>";
-								$contador=0;
-							while( $fila = mysqli_fetch_assoc( $resultado ) )
-							{
-									
-									
-								$salida .=
-									 "<tr>
-									 	<td>
-										 
-											<option value='".$fila[ $campo_llave_primaria ]."'>".$fila[ $campo_a_mostrar ]."</option>
+			$salida = "<SELECT  id='sintomas' ng-model='lista' ng-change='cargar_datos_php()' multiple size='20' class='form-control'>";
+									$contador=0;
+			while( $fila = mysqli_fetch_assoc( $resultado ) )
+			{
 
-										</td>
-									 </tr>";
-									
-							}
-							
-							
-		$salida .=" </tbody>
-					</table>
-					<input type='hidden'  >
-					
-				 ";
+
+				$salida .=
+					 "<tr>
+						<td>
+
+							<option value='".$fila[ $campo_llave_primaria ]."'>".$fila[ $campo_a_mostrar ]."</option>
+
+						</td>
+					 </tr>";
+
+			}
+
+
+			
 
 		return $salida;	
 
