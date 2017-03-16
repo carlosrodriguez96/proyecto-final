@@ -149,8 +149,7 @@ class BD extends Graficos
 
 		 function consultar($valores)
 
-		 {
-		 	
+		 {	
 		 		
 		 	include( "config.php" );
         	
@@ -161,7 +160,7 @@ class BD extends Graficos
 		        $conn = new mysqli( $servidor, $usuario, $clave, $bd );
 		        
 		        //Se busca principalmente por alias.
-		     		$sql = "SELECT tb_enfermedades.enfermedad , COUNT(tb_informe.id_enfermedad) as conteo_sintomas , (SELECT COUNT(tb_informe.id_enfermedad) conteo_total FROM tb_informe where tb_enfermedades.id_enfermedad = tb_informe.id_enfermedad GROUP BY id_enfermedad) as conteo_total FROM tb_informe , tb_enfermedades WHERE tb_informe.id_enfermedad = tb_enfermedades.id_enfermedad AND tb_informe.id_sintomas in($valores) GROUP BY tb_informe.id_enfermedad";
+			$sql = "SELECT tb_enfermedades.enfermedad , COUNT(tb_informe.id_enfermedad) as conteo_sintomas , (SELECT COUNT(tb_informe.id_enfermedad) conteo_total FROM tb_informe where tb_enfermedades.id_enfermedad = tb_informe.id_enfermedad GROUP BY id_enfermedad) as conteo_total FROM tb_informe , tb_enfermedades WHERE tb_informe.id_enfermedad = tb_enfermedades.id_enfermedad AND tb_informe.id_sintomas in($valores) GROUP BY tb_informe.id_enfermedad";
 				 	//echo $sql;
 		        //LA tabla que se cree debe tener la tabla aquí requerida, y los campos requeridos abajo.
 		       
@@ -177,7 +176,7 @@ class BD extends Graficos
 		            if ($outp != "") {$outp .= ",";}
 		            $outp .= '{"Enfermedad":"'.utf8_encode($rs["enfermedad"]).'",';            // <-- La tabla MySQL debe tener este campo.
 		            $outp .= '"conteo_sintomas":"'.$rs["conteo_sintomas"].'",';         // <-- La tabla MySQL debe tener este campo.
-		           	$outp .= '"abc":"'.$sql.'",';
+			    $outp .= '"abc":"'.$sql.'",';
 		            $outp .= '"conteo_total":"'.$rs["conteo_total"].'"}';     // <-- La tabla MySQL debe tener este campo.
 		            
 		          
