@@ -5,7 +5,7 @@
 * Jhon Jairo Salazar 
 */
  -->
-
+<!DOCTYPE html>
 <html lang="ES" ng-app="acumuladorApp">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <head>
@@ -39,36 +39,44 @@
 			</div>	
 			<div class="col-xs-12 col-md-8 col-lg-8 ">
 			<center><div id="carga"> </div></center>
-			<div ng-repeat="x in campos">
+			
 			<?php 	
-					echo $nuevo_obj->imprimir("{{x.abc}}"); // funcion que imprime
-				?>
-		 	 
-            <table class="table table-hover table-bordered">
-                <thead>
-                  <tr>
-                    <th>Enfermedad Posible</th>
-                    <th>Sintomas en esta Enfermedad</th>
-                    <th>Sintomas encontrados</th>
-                  </tr>
-                </thead>
-                 <tbody>
-                  <tr>
-                    <td>{{ x.Enfermedad }}</td><!--campos base de datos-->
-                    <td>{{ x.conteo_total }}</td><!--campos base de datos-->
-                    <td>{{ x.conteo_sintomas }}</td><!--campos base de datos-->
+					echo $nuevo_obj->imprimir("{{x.abc}}"); // trae la información a mostrar.
 
-                  </tr>
-                  </tbody>
-            </table>      
-                                  
-        </div>
+				?>
+		 <div id="tabla">
+		    <table class="table table-hover table-bordered" >
+			<thead>
+			  <tr>
+			    <th>Enfermedad Posible</th>
+			    <th>Sintomas en esta Enfermedad</th>
+			    <th>Sintomas encontrados</th>
+			  </tr>
+			</thead>
+			 <tbody>
+			  <tr ng-repeat="x in campos">
+			    <td>{{ x.Enfermedad }}</td>
+			    <td>{{ x.conteo_total }}</td>
+			    <td>{{ x.conteo_sintomas }}</td>
+			  </tr>
+			  </tbody>
+		    </table>      
+                </div>                  
+        
 				 
-			</div>
+		</div>
 		</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/mi_js.js"></script> 
+	<script type="text/javascript" src="js/mi_js.js"></script>
+	
+	 
+
+
+</body>
+</html>
+
+
 	
 	 
 
