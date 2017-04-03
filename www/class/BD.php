@@ -60,7 +60,7 @@ class BD extends Graficos
 		 	$resultado = $this->conexion->query( $sql );	
 		 	return $resultado;
 		 }
-		/**
+		  /**
 		*esta funcion se encarga de traer los datos de la tabla.
 		*
 		*@param 		texto 			resultado de la busqueda.
@@ -101,34 +101,42 @@ class BD extends Graficos
 		 *@param 		texto 			campo a mostrar.
 		 *@param 		texto 			metodo.
 		 *@param 		texto 			envio de informacion.
-		 *@return 		caracteres		retorna la informacion.
+		 *@param 		caracteres		retorna la informacion.
 		 */
-		 function traer_informacion( $nombre_lista, $tabla, $campo_llave_primaria, $campo_a_mostrar,$method,$action )
+		 function traer_informacion( $nombre_lista, $tabla, $campo_llave_primaria, $campo_a_mostrar)
 		{
 		
 
-			$salida = "";
+		$salida = "";
 			include 'config.php';
-			//------------SQL Se traen datos----------------------------------------------------
-			$sql = "SELECT * FROM  $tabla ";	
+		//------------SQL Se traen datos----------------------------------------------------
+		$sql = "SELECT * FROM  $tabla ";	
 			if($sn_pruebas=="s") echo "<h3><p class='bg-success'>$sql</p></h3>";
-			$resultado = $this->conexion->query( $sql );
-			$salida = "<SELECT  id='sintomas' ng-model='lista' ng-change='cargar_datos_php()' multiple size='20' class='form-control'>";
-			while( $fila = mysqli_fetch_assoc( $resultado ) )
-			{
-				$salida .=
-					 "<tr>
-						<td>
+		$resultado = $this->conexion->query( $sql );
 
-							<option value='".$fila[ $campo_llave_primaria ]."'>".$fila[ $campo_a_mostrar ]."</option>
+		$salida = "<SELECT  id='sintomas' ng-model='lista' ng-change='cargar_datos_php()' multiple size='20' class='form-control'>";
+								$contador=0;
+							while( $fila = mysqli_fetch_assoc( $resultado ) )
+							{
+									
+									
+								$salida .=
+									 "<tr>
+									 	<td>
+										 
+											<option value='".$fila[ $campo_llave_primaria ]."'>".$fila[ $campo_a_mostrar ]."</option>
 
-						</td>
-					 </tr>";
-
-			}
-
-
-			
+										</td>
+									 </tr>";
+									
+							}
+							
+							
+		$salida .=" </tbody>
+					</table>
+					<input type='hidden'  >
+					
+				 ";
 
 		return $salida;	
 
@@ -136,13 +144,17 @@ class BD extends Graficos
 		}
 	 	/**
 		*esta funcion se encarga realizar la consulta en la tabla.
-		*@param 		texto 			valores de la lista.		
+		*
+		*@param 		texto 			Es el nombre de la tabla.
+		*@param 		texto 			campo clave.
+		*@param 		texto 			campo a buscar.	
 		*@return 		caracteres 		retorna la consulta.
 		*/
 
 		 function consultar($valores)
 
-		 {	
+		 	{
+		 	
 		 		
 		 	include( "config.php" );
         	
@@ -153,7 +165,7 @@ class BD extends Graficos
 		        $conn = new mysqli( $servidor, $usuario, $clave, $bd );
 		        
 		        //Se busca principalmente por alias.
-			$sql = "SELECT tb_enfermedades.enfermedad , COUNT(tb_informe.id_enfermedad) as conteo_sintomas , (SELECT COUNT(tb_informe.id_enfermedad) conteo_total FROM tb_informe where tb_enfermedades.id_enfermedad = tb_informe.id_enfermedad GROUP BY id_enfermedad) as conteo_total FROM tb_informe , tb_enfermedades WHERE tb_informe.id_enfermedad = tb_enfermedades.id_enfermedad AND tb_informe.id_sintomas in($valores) GROUP BY tb_informe.id_enfermedad";
+		     		$sql = "SELECT tb_enfermedades.enfermedad , COUNT(tb_informe.id_enfermedad) as conteo_sintomas , (SELECT COUNT(tb_informe.id_enfermedad) conteo_total FROM tb_informe where tb_enfermedades.id_enfermedad = tb_informe.id_enfermedad GROUP BY id_enfermedad) as conteo_total FROM tb_informe , tb_enfermedades WHERE tb_informe.id_enfermedad = tb_enfermedades.id_enfermedad AND tb_informe.id_sintomas in($valores) GROUP BY tb_informe.id_enfermedad";
 				 	//echo $sql;
 		        //LA tabla que se cree debe tener la tabla aquí requerida, y los campos requeridos abajo.
 		       
@@ -169,7 +181,7 @@ class BD extends Graficos
 		            if ($outp != "") {$outp .= ",";}
 		            $outp .= '{"Enfermedad":"'.utf8_encode($rs["enfermedad"]).'",';            // <-- La tabla MySQL debe tener este campo.
 		            $outp .= '"conteo_sintomas":"'.$rs["conteo_sintomas"].'",';         // <-- La tabla MySQL debe tener este campo.
-			    $outp .= '"abc":"'.$sql.'",';
+		           	$outp .= '"abc":"'.$sql.'",';
 		            $outp .= '"conteo_total":"'.$rs["conteo_total"].'"}';     // <-- La tabla MySQL debe tener este campo.
 		            
 		          
@@ -184,16 +196,64 @@ class BD extends Graficos
 		 	
 		 	//return $sql;
 
+		 	}
+			/**
+			*esta funcion se encarga realizar la consulta en la tabla.
+			*@return 		caracteres 		retorna la consulta.
+			*/
+
+		 		 function consulta(){
+		 			include( "config.php" );
+			        
+			        /*Esta conexión se realiza para la prueba con angularjs*/
+			        header("Access-Control-Allow-Origin: *");
+			        header("Content-Type: application/json; charset=UTF-8");
+			        
+			        $conn = new mysqli( $servidor, $usuario, $clave, $bd );
+			        
+			        //Se busca principalmente por alias.
+			        
+			        $consulta = explode(",", $_GET['busqueda']);
+			        //echo $consulta;
+			        $sql  = " SELECT * FROM tb_consultas  WHERE ";
+			        for ($i=0; $i < count($consulta); $i ++) { 
+			        	
+			        	$sql .= " consulta LIKE '%".$consulta[$i]."%'";
+			        	$sql .= " OR respuesta LIKE '%".$consulta[$i]."%'";
+			        	if ($i < (count($consulta)-1)) $sql.=" or ";
+			        	
+			        }
+			        
+			        
+			        //echo $sql;
+			        //LA tabla que se cree debe tener la tabla aquí requerida, y los campos requeridos abajo.
+			        $result = $conn->query( $sql );
+			        
+			        $outp = "";
+			        
+			        while($rs = $result->fetch_array( MYSQLI_ASSOC )) 
+			        {
+			            //Mucho cuidado con esta sintaxis, hay una gran probabilidad de fallo con cualquier elemento que falte.
+			            if ($outp != "") {$outp .= ",";}
+			            
+			            $outp .= '{"consulta":"'.utf8_encode($rs["consulta"]).'",';
+			            $outp .= '"Descripcion":"'.utf8_encode($rs["respuesta"]).'",';     // <-- La tabla MySQL debe tener este campo.
+			            $outp .= '"Imagen":"'.$rs["url"].'"}';            // <-- La tabla MySQL debe tener este campo.
+			        }
+			        
+			        $outp ='{"records":['.$outp.']}';
+			        $conn->close();
+			        
+			        echo($outp);
+			    
+			     
+			}
+			
+
 		 }
 
-		 
-		
-		 	
-		 	
+	
 		 
 
-		
-	}
-		 
+ ?>	
 
- ?>
