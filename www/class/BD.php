@@ -158,7 +158,7 @@ class BD extends Graficos
 		 		
 		 	include( "config.php" );
         	
-		        /*Esta conexión se realiza para la prueba con angularjs*/
+		        /*Esta conexiÃ³n se realiza para la prueba con angularjs*/
 		        header("Access-Control-Allow-Origin: *");
 		        header("Content-Type: application/json; charset=UTF-8");
 		        
@@ -167,7 +167,7 @@ class BD extends Graficos
 		        //Se busca principalmente por alias.
 		     		$sql = "SELECT tb_enfermedades.enfermedad , COUNT(tb_informe.id_enfermedad) as conteo_sintomas , (SELECT COUNT(tb_informe.id_enfermedad) conteo_total FROM tb_informe where tb_enfermedades.id_enfermedad = tb_informe.id_enfermedad GROUP BY id_enfermedad) as conteo_total FROM tb_informe , tb_enfermedades WHERE tb_informe.id_enfermedad = tb_enfermedades.id_enfermedad AND tb_informe.id_sintomas in($valores) GROUP BY tb_informe.id_enfermedad";
 				 	//echo $sql;
-		        //LA tabla que se cree debe tener la tabla aquí requerida, y los campos requeridos abajo.
+		        //LA tabla que se cree debe tener la tabla aquÃ­ requerida, y los campos requeridos abajo.
 		       
 		       	//$this->imprimir($sql);
 		        $result = $this->conexion->query( $sql );	
@@ -197,15 +197,15 @@ class BD extends Graficos
 		 	//return $sql;
 
 		 	}
-			/**
-			*esta funcion se encarga realizar la consulta en la tabla.
-			*@return 		caracteres 		retorna la consulta.
-			*/
-
+		 		/**
+		*esta funcion se encarga realizar la consulta en la tabla.
+		*
+		*@return 		caracteres 		retorna la consulta.
+		*/
 		 		 function consulta(){
 		 			include( "config.php" );
 			        
-			        /*Esta conexión se realiza para la prueba con angularjs*/
+			        /*Esta conexiÃ³n se realiza para la prueba con angularjs*/
 			        header("Access-Control-Allow-Origin: *");
 			        header("Content-Type: application/json; charset=UTF-8");
 			        
@@ -214,19 +214,22 @@ class BD extends Graficos
 			        //Se busca principalmente por alias.
 			        
 			        $consulta = explode(",", $_GET['busqueda']);
-			        //echo $consulta;
-			        $sql  = " SELECT * FROM tb_consultas  WHERE ";
+			         
+			        	$sql  = " SELECT DISTINCT tb_consultas.consulta,tb_consultas.respuesta,tb_consultas.url FROM tb_consultas,tb_palabras_claves  WHERE tb_consultas.id_palabra=tb_palabras_claves.id_palabra and ";
 			        for ($i=0; $i < count($consulta); $i ++) { 
 			        	
-			        	$sql .= " consulta LIKE '%".$consulta[$i]."%'";
-			        	$sql .= " OR respuesta LIKE '%".$consulta[$i]."%'";
+			        	$sql .= " tb_palabras_claves.palabras LIKE '%".$consulta[$i]."%'";
+			        	$sql .= " OR tb_consultas.consulta LIKE '%".$consulta[$i]."%'";
 			        	if ($i < (count($consulta)-1)) $sql.=" or ";
 			        	
-			        }
+			        	}
+			    	
+			        
+			       
 			        
 			        
 			        //echo $sql;
-			        //LA tabla que se cree debe tener la tabla aquí requerida, y los campos requeridos abajo.
+			        //LA tabla que se cree debe tener la tabla aquÃ­ requerida, y los campos requeridos abajo.
 			        $result = $conn->query( $sql );
 			        
 			        $outp = "";
@@ -256,4 +259,3 @@ class BD extends Graficos
 		 
 
  ?>	
-
