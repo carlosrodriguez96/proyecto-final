@@ -70,15 +70,7 @@
        				
 		            		
 		            		
-		            	 $scope.ocultar=function()
-                    {
-                    	console.log("Hola bebÃ©");
-                    	document.getElementById('con-list').style.display="none";
-                    	document.getElementById('cont-preg').style.display="block";
-
-	            	}	
-		            		
-		            		
+		            	
 					
             			
                     }	
@@ -93,3 +85,7 @@
 
             ]
          );
+
+        
+	
+				
