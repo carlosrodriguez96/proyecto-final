@@ -21,7 +21,7 @@
 	?>
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container">
 	<div ng-controller="acumuladorAppCtrl">		
 		<div class="row">
 			<?php  echo $nuevo_obj->encabezado("Diagnóstico","de enfermedades"); ?> 
@@ -68,27 +68,11 @@
                
 				 
 			</div>
-			<div class="col-xs-12 col-md-1 col-lg-1"><button type="button" class="btn btn-primary" ng-click="ocultar()"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</button></div>
-		</div>
-		<div class="row" id="cont-preg" style="display:none;">
-			<div class="col-xs-12 col-md-3 col-lg-3">
-				<input type='text' class='form-control' id='usrname' placeholder='Ingrese Búsqueda' ng-model='busqueda' ng-change='consulta()'>
+			<div class="col-xs-12 col-md-1 col-lg-1">
+				<a href="ayuda.php"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</button></a>
 			</div>
 		</div>
-		<div class="row" ng-repeat="x in campos"  >
 		
-		<br>
-			<div class="col-xs-12 col-md-3 col-lg-2">
-				<h3>{{x.consulta}}</h3>
-			</div>
-			<div class="col-xs-12 col-md-3 col-lg-2" style="text-align: justify;">
-				{{x.Descripcion}}
-			</div>
-			<div class="col-xs-12 col-md-3 col-lg-8">
-				<img src="{{x.Imagen}}" class="img-responsive">
-			</div>
-
-		</div>
 		
 
 		</div>
@@ -102,5 +86,4 @@
 
 </body>
 </html>
-
 
