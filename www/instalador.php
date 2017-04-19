@@ -1,6 +1,6 @@
 
 <!--
-	Autor: Camilo Figueroa ( Crivera )
+	Carlos Rodriguez y Jhon Jairo Salazar
 	Primer formulario para la instalación de un aplicativo, aunque el aplicativo en sí no existe, solo se mostrará el proceso de instalación.
 -->
 
