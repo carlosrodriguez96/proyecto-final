@@ -1,5 +1,6 @@
 <?php 
-	class Graficos
+include 'Verificar.php';
+	class Graficos extends Verificar
 	{
 		/**
 		* Esta función se encarga de invocar los estilos.
