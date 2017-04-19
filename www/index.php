@@ -18,6 +18,7 @@
 		include 'class/BD.php'; //trae las funciones de la pagina BD.php
 		$nuevo_obj=new BD();	// llama la clase BD
 			echo $nuevo_obj->estilos("bootstrap"); // trae la funcion estilos de la clase
+			echo $nuevo_objeto->validar_instalador();
 	?>
 </head>
 <body>
