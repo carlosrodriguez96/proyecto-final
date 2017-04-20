@@ -60,13 +60,13 @@
 			$tmp_nombre_objeto_o_tabla = "tb_consultas";
 
 				  $sql="CREATE TABLE IF NOT EXISTS $tmp_nombre_objeto_o_tabla ("
-			      ."id_consulta int(11) NOT NULL,consulta varchar(500) NOT NULL,"
-			      ."respuesta varchar(5000) NOT NULL,"
-			      ."url varchar(100) NOT NULL,"
-			      ."id_palabra int(11) NOT NULL,"
-			      ."PRIMARY KEY(id_consulta),"
-			      ." KEY index_palabra (id_palabra)"
-			      .") ENGINE=InnoDB DEFAULT CHARSET=latin1";
+				      ."id_consulta int(11) NOT NULL,consulta varchar(500) NOT NULL,"
+				      ."respuesta varchar(5000) NOT NULL,"
+				      ."url varchar(100) NOT NULL,"
+				      ."id_palabra int(11) NOT NULL,"
+				      ."PRIMARY KEY(id_consulta),"
+				      ." KEY index_palabra (id_palabra)"
+				      .") ENGINE=InnoDB DEFAULT CHARSET=latin1";
 			      
 			
 			
@@ -93,11 +93,11 @@
 
 			//El sistema procederá a crear la primera tabla si no existe.
 			$sql=" CREATE TABLE IF NOT EXISTS $tmp_nombre_objeto_o_tabla ( "
-				 ."id_enfermedad int(10) NOT NULL AUTO_INCREMENT,"
-				 ."enfermedad varchar(100) NOT NULL,"
-				 ."recomendaciones varchar(100) NOT NULL,"
-				 ."PRIMARY KEY (id_enfermedad)"
-				.") ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1";
+			 ."id_enfermedad int(10) NOT NULL AUTO_INCREMENT,"
+			 ."enfermedad varchar(100) NOT NULL,"
+			 ."recomendaciones varchar(100) NOT NULL,"
+			 ."PRIMARY KEY (id_enfermedad)"
+			.") ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1";
 		
 			
 
@@ -192,7 +192,7 @@
 		} 									// Super if - final
 
 	/*******************************************f u n c i o n e s*********************************************************************/
-
+		//falta corregir el error de la creacion de la tabla tb_informe, ya que se crea dos veces y detiene el proceso de instalación.//
 	
 
 ?>
