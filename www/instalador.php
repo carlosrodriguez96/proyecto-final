@@ -10,7 +10,8 @@
 		<?php 
 		include 'class/BD.php'; //trae las funciones de la pagina BD.php
 		$nuevo_obj=new BD();	// llama la clase BD
-			echo $nuevo_obj->estilos("bootstrap"); // trae la funcion estilos de la clase
+		echo $nuevo_obj->estilos("bootstrap"); // trae la funcion estilos de la clase
+		$nuevo_obj->verificar_instalador();//llamado a la función que verifica la existencia del instalador.
 			
 	?>
 	</head>
@@ -46,7 +47,7 @@
 			</div>
 			<div class="col-xs-12 col-md-2 col-lg-2"></div>
 			<div class="col-xs-12 col-md-5 col-lg-5 "><h3 style="color:red;text-align: justify;">
-			A continuaci&oacute;n se proceder&aacute; a instalar un aplicativo, el cual permite observar dicho proceso al detalle.<br><br>
+				A continuaci&oacute;n se proceder&aacute; a instalar un aplicativo, el cual permite observar dicho proceso al detalle.<br><br>
 				Sin embargo requiere de que la <strong>base de datos</strong> sea creada con anterioridad. <br><br></h3>
 			</div>
 		</div>
