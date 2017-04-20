@@ -11,3 +11,4 @@
     $objeto_verificador->borrar_archivo( "instalador.php" );
     $objeto_verificador->borrar_archivo( "instalando.php" );
     header( "location: index.php" );
+?>
