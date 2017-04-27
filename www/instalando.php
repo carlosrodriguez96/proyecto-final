@@ -1,9 +1,7 @@
 <?php
 
-	
-
 	/**
-	* Autor: Camilo Figueroa
+	* Autor (s): carlos rodriguez, jhon jairo salazar
 	* Este programa creará una base de datos con todos sus componentes. La prueba sería usar este script y después mirar 
 	* que efectivamente exportándola y creando el gráfico del modelo entidad relación, todos sus componentes estén ahí.
 	*
@@ -63,13 +61,13 @@
 			$tmp_nombre_objeto_o_tabla = "tb_palabras_claves";
 
 				  $sql="CREATE TABLE IF NOT EXISTS $tmp_nombre_objeto_o_tabla ("
-			      ."id_palabra int(11) NOT NULL AUTO_INCREMENT,"
+			      	  ."id_palabra int(11) NOT NULL AUTO_INCREMENT,"
 				  ."palabras varchar(100) NOT NULL,"
 				  ."PRIMARY KEY (id_palabra)"
 				  .") ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1";
 
 			      
-			echo "se crea la tabla".$tmp_nombre_objeto_o_tabla.$sql."<br>";
+			
 			
 				
 
@@ -91,17 +89,17 @@
 		{
 			$tmp_nombre_objeto_o_tabla = "tb_consultas";
 
-				  $sql="CREATE TABLE IF NOT EXISTS $tmp_nombre_objeto_o_tabla ("
+	                  $sql="CREATE TABLE IF NOT EXISTS $tmp_nombre_objeto_o_tabla ("
 			      ."id_consulta int(11) NOT NULL,consulta varchar(500) NOT NULL,"
 			      ."respuesta varchar(5000) NOT NULL,"
 			      ."url varchar(100) NOT NULL,"
 			      ."id_palabra int(11) NOT NULL,"
-				   ."PRIMARY KEY (id_consulta),"
-					 ."KEY index_palabra (id_palabra),"
-					 ."CONSTRAINT tb_consultas_ibfk_1 FOREIGN KEY (id_palabra) REFERENCES tb_palabras_claves (id_palabra) ON DELETE CASCADE ON UPDATE CASCADE"
-					.") ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1";
+			      ."PRIMARY KEY (id_consulta),"
+			      ."KEY index_palabra (id_palabra),"
+			      ."CONSTRAINT tb_consultas_ibfk_1 FOREIGN KEY (id_palabra) REFERENCES tb_palabras_claves (id_palabra) ON DELETE CASCADE ON UPDATE CASCADE"
+			      .") ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1";
 			      
-			echo "se crea la tabla".$tmp_nombre_objeto_o_tabla.$sql."<br>";
+			
 			
 				
 
@@ -132,7 +130,7 @@
 				 ."PRIMARY KEY (id_enfermedad)"
 				.") ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1";
 		
-			echo "se crea la tabla".$tmp_nombre_objeto_o_tabla.$sql."<br>";
+			
 
 			$resultado = $conexion->query( $sql );
 
@@ -158,7 +156,7 @@
 				.") ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1";
 
 		
-			echo "se crea la tabla".$tmp_nombre_objeto_o_tabla.$sql."<br>";
+			
 
 			$resultado = $conexion->query( $sql );
 
@@ -195,7 +193,7 @@
 					.") ENGINE=InnoDB DEFAULT CHARSET=latin1";
 
 		
-			echo "se crea la tabla".$tmp_nombre_objeto_o_tabla.$sql."<br>";
+			
 
 			$resultado = $conexion->query( $sql );
 
@@ -213,6 +211,21 @@
 		
 		if( $interrupcion_proceso == 0 )
 		{
+			unlink('config.php');//Elimina el archivo config.php
+			$archivo = fopen('config.php', "a");//Abrimos un nuevo config.
+			fwrite($archivo , '<?php
+			//Este es el archivo que contiene la configuración de mi bd.
+							
+				$servidor = "'.$_GET[ 'servidor' ].'";
+				$usuario = "'.$_GET[ 'usuario' ].'";
+				$clave = "'.$_GET[ 'contrasena' ].'";
+				$bd = "'.$_GET[ 'bd' ].'";
+				$sn_pruebas="n";//ver sql
+				$sn_pruebas_log="n";//ver sql
+
+			?> '); // agregamos un texto al config.
+			fclose($archivo); //Cerramos archivo config.php
+			
 			//ojo aquí se usa la clase verificadora para imprimir lo que se ha creado.
 			echo $objeto_verificador->mostrar_tablas( $conexion ); //Hay que recordar que la conexión ya se creó arriba.
 
@@ -225,15 +238,11 @@
 		
 		echo $cadena_informe_instalacion; //Se imprime un sencillo informe de la instalación.
 
-	}else{ 									// Super if - else 
+		}else{ 									// Super if - else 
 			echo "<br>Por favor ingresa el valor de los campos solicitados: Servidor, usuario, base de datos.<br>";
 		} 									// Super if - final
 
-	/*******************************************f u n c i o n e s*********************************************************************/
-
+	
 	
 
-?>		
-	
-
-
+?>
